@@ -4,7 +4,7 @@ for i in curl cut date fgrep gaiacli jq tee ; do [[ $(command -v $i) ]] || { ech
 
 DELEGATEE=${GAIACLI_DELEGATEE:-"cosmosvaloper1rcp29q3hpd246n6qak7jluqep4v006cdsc2kkl"} # default to in3s.com
 DELEGATION_MIN=${GAIACLI_DELEGATION_MIN:-1000000} # minimum amount to delegate in bond_denom (COINs)
-FEES=$([[ "x$GAIACLI_FEE" == "x" ]] || echo "--fees $GAIACLI_FEE")
+FEES=$([[ "x$GAIACLI_FEE" == "x" ]] || echo "--fees $GAIACLI_FEE") # GAIACLI_FEE must include denom, eg muon or uatom
 FROM=${GAIACLI_FROM:-$(gaiacli keys list | fgrep -v NAME -m 1 | cut -f1)}
 LOGGER=${GAIACLI_LOGGER:-"tee --append $0.log"} # stdout of gaiacli is piped into stdin of LOGGER
 NAP=${GAIACLI_NAP:-86400} # in seconds
