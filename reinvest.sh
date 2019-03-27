@@ -38,7 +38,7 @@ while true ; do
    DELEGATION=$(( $COINS + $REWARDS - $RESERVE ))
    VALOPER=$( ( gaiacli query staking validator $VALIDATOR --node $NODE --trust-node --output json 2> /dev/null || echo '{"operator_address":""}' ) | jq -r ".operator_address") ;
 
-   [[ $DELEGATION -ge $DELEGATION_MIN ]] && tx staking delegate $DELEGATEE $DELEGATION$COIN
+   [[ $DELEGATION -ge $DELEGATION_MIN ]] && tx staking delegate $DELEGATEE $DELEGATION$COIN || DELEGATION=0
 
    [[ $VALOPER == $VALIDATOR ]] && tx distr withdraw-rewards $VALIDATOR --commission
 
